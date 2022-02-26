@@ -1,0 +1,139 @@
+#:kivy 2.0.0
+
+<Start>:
+	room_name: room_name
+	room_ip: room_ip
+	room_port: room_port
+	room_hosts: room_hosts
+	room_password: room_password
+	room_encryption: room_encryption
+
+	FloatLayout:
+		size_hint: None, None
+        size: root.width, root.height
+        pos_hint: {'x': 0, 'y': 0}
+		canvas.before:
+            Rectangle:
+				source: 'src/img/background_img.jpg'
+                pos: self.pos
+                size: self.size
+
+		Button:
+			pos_hint: {"x":.01, "top":.98}
+			size_hint: [None, None]
+			height: 40
+			width: 40
+			background_normal: "src/img/back.png"
+			on_release:
+				app.change_screen('home', 'right')
+		
+		Label:
+            text: "Room Options"
+            pos_hint: {"x": 0, "top": 1.45}
+			font_size: '24sp'
+			font_size: self.width/25
+		
+		Button:
+			id: room_create
+			background_color: 255, 215, 0, 1
+			color: [0,0,0,1]
+			text: "Save and Create"
+			size_hint: [.50, .1]
+			bold: True
+			italic: True
+			font_size: self.width/15
+			pos_hint: {"top": .2, 'center_x': .5}
+			on_release:
+				app.create_server(room_name, room_ip, room_port, room_hosts, room_password, room_encryption)
+				#app.default_clients()
+				#app.add_client_view()
+	
+		GridLayout:
+			id: grid
+			spacing_bottom: 5
+			cols: 2
+			size_hint: [0.4, 0.3]
+			pos_hint: {'center_x':.25, 'center_y':0.6}
+			
+			Label:
+				id: l_name
+				text: 'Name: '
+				bold: True
+				font_size: self.width/10	
+
+			TextInput:
+				id: room_name
+				multiline: False
+				hint_text: 'Input Room name'
+				on_text: root.insert_text(room_name, 20)
+
+			Label:
+				id: l_ip
+				text: 'Ip: '
+				bold: True
+				font_size: self.width/10
+
+			TextInput:
+				id: room_ip
+				multiline: False
+				hint_text: 'Input Room Ip'
+				on_text: root.insert_text(room_ip, 40)
+
+			Label:
+				id: l_port
+				text: 'Port: '
+				bold: True
+				font_size: self.width/10
+
+			TextInput:
+				id: room_port
+				multiline: False
+				input_filter: 'int'
+				hint_text: 'Room Port, number'
+				on_text: root.insert_number(room_port, 65535)
+
+
+		GridLayout:
+			id: grid_2
+			cols: 2
+			size_hint: [0.4, 0.3]
+			pos_hint: {'center_x':0.7, 'center_y':0.6}
+
+			Label:
+				id: l_hosts
+				text: 'Max hosts: '
+				bold: True
+				font_size: self.width/10
+
+			TextInput:
+				id: room_hosts
+				multiline: False
+				input_filter: 'int'
+				hint_text: 'Number 1 - 15'
+				on_text: root.insert_number(room_hosts, 15)
+				
+			Label:
+				id: l_encryption
+				text: 'Data Encryption? '
+				bold: True
+				font_size: self.width/10
+
+			CheckBox:
+				id: room_encryption
+				active: False
+				on_release: 
+					root.check_press()
+
+			Label:
+				id: l_password
+				text: 'Network Password:'
+				bold: True
+            	font_size: self.width/10
+
+			TextInput:
+				id: room_password
+				multiline: False
+				disabled: not room_encryption.active
+				hint_text: 'Input Password'
+				on_text: root.insert_text(room_password, 100)
+

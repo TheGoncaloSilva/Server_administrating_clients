@@ -1,0 +1,46 @@
+#:kivy 2.0.0
+
+<Dash>:
+	
+	FloatLayout:
+		size_hint: None, None
+        size: root.width, root.height
+        pos_hint: {'x': 0, 'y': 0}
+
+		canvas.before:
+            Rectangle:
+				source: 'src/img/background_img.jpg'
+                pos: self.pos
+                size: self.size
+
+		# Go back button
+		#Button:
+		#	pos_hint: {"x":.01, "top":.98}
+		#	size_hint: [None, None]
+		#	height: 40
+		#	width: 40
+		#	background_normal: "src/img/back.png"
+		#	on_release:
+		#		app.change_screen('home', 'right')
+			
+		Label:
+            text: "Dashboard"
+            pos_hint: {"x": 0, "top": 1.45}
+			font_size: '24sp'
+			font_size: self.width/25
+
+		GridLayout:
+			id: box
+			cols: 4
+			rows: 4
+			spacing: 5
+			size_hint: [0.8, 0.8]
+			pos_hint: {'center_x':0.5, 'center_y':0.5}
+
+			
+			
+
+
+
+
+

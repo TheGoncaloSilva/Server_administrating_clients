@@ -1,0 +1,44 @@
+#:kivy 2.0.0
+
+<Home>:
+	FloatLayout:
+		canvas.before:
+            Rectangle:
+				source: 'src/img/background_img.jpg'
+                pos: self.pos
+                size: self.size
+
+		Label:
+			pos_hint: {"center_x":.5, "top":.95}
+            text: "Network Manager"
+			markup: True
+			size_hint: [.70, .1]
+			font_size: '40sp'
+			bold: True
+			color: [1,1,1,1]
+			canvas.before:
+				Color:
+					rgba: [0,0,0,1]
+				Rectangle:
+					size: self.width+35, self.height
+					pos: self.x-17.5, self.y-2.5
+        Label:
+            text: "Select an option"
+            bold: True
+            size_hint: [0.8, 0.2]
+            pos_hint: {"x":0.1, "top":0.82}
+            font_size: "27sp"
+
+		Button:
+			id: btn_create
+			background_color: 255, 215, 0, 1
+			color: [0,0,0,1]
+			text: "Create group"
+			size_hint: [.50, .1]
+			bold: True
+			italic: True
+			font_size: "25sp"
+			pos_hint: {"top": .65, 'center_x': .5}
+			on_release:
+				app.change_screen('start', 'left')
+

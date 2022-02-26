@@ -1,0 +1,17 @@
+#:kivy 2.0.0
+#:include 'src/pages/kivy/home.kv'
+#:include 'src/pages/kivy/start.kv'
+#:include 'src/pages/kivy/dash.kv'
+
+FloatLayout:
+        ScreenManager:
+                id: screen_manager
+                Home:
+                        name: 'home'
+                        id: home
+                Start:
+                        name: 'start'
+                        id: start
+                Dash:
+                        name: 'dash'
+                        id: dash
